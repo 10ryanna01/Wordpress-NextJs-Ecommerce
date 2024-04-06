@@ -1,0 +1,14 @@
+@use "../../styles/utilities.scss" as utils;
+
+.FSC__header {
+  display: flex;
+  flex-flow: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2rem;
+  background: utils.$dude;
+
+  &__title {
+    @extend .FSC__typography__h1;
+  }
+}

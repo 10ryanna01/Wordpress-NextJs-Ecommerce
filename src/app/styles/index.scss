@@ -1,0 +1,37 @@
+@use "./globals.scss";
+@use "./utilities.scss" as utils;
+
+.FSC__product-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+
+  gap: 2rem;
+
+  @include utils.desktop {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+  @include utils.tablet {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  @include utils.phone {
+    grid-template-columns: 1fr;
+  }
+}
+
+.FSC__card {
+  display: flex;
+
+  flex-flow: column;
+  &__title {
+    @extend .FSC__typography__h3;
+  }
+  &__img {
+    max-width: 360px;
+    height: auto;
+  }
+  &__price {
+  }
+  &__desc {
+  }
+}

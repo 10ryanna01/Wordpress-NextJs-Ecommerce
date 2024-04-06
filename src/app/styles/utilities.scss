@@ -1,0 +1,42 @@
+$dude: #8060f6;
+
+/// mixins
+
+@mixin phone {
+  @media (max-width: 599px) {
+    @content;
+  }
+}
+@mixin tablet {
+  @media (min-width: 600px) and (max-width: 980px) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media (min-width: 981px) and (max-width: 1500px) {
+    @content;
+  }
+}
+
+.FSC__typography {
+  &__h1 {
+    font-size: 4rem;
+
+    @include phone {
+      font-size: 2.5rem;
+    }
+  }
+
+  &__h2 {
+    font-size: 3rem;
+  }
+
+  &__h3 {
+    font-size: 2.5rem;
+  }
+
+  &__h4 {
+    font-size: 2rem;
+  }
+}
