@@ -10,7 +10,7 @@ export const metadata = {
 };
 
 export default function RootLayout({ children }) {
-  const secret = process.env.NEXT_PUBLIC_SNIPCART_API_KEY;
+  const secret = process.env.NEXT_PUBLIC_SNIPCART;
 
   return (
     <html lang="en">
@@ -22,7 +22,10 @@ export default function RootLayout({ children }) {
           href="https://cdn.snipcart.com/themes/3.7.0/default/snipcart.css"
         />
 
-        <Script src="https://cdn.snipcart.com/themes/v3.2.0/default/snipcart.js" />
+        <Script
+          async
+          src="https://cdn.snipcart.com/themes/v3.2.0/default/snipcart.js"
+        />
         <div
           hidden
           id="snipcart"
