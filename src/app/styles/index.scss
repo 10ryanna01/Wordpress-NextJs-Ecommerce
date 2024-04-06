@@ -27,11 +27,17 @@
     @extend .FSC__typography__h3;
   }
   &__img {
-    max-width: 360px;
+    max-width: 300px;
     height: auto;
   }
   &__price {
   }
   &__desc {
+  }
+}
+
+.FSC__Buttons {
+  &__primary {
+    @include utils.PrimaryButton();
   }
 }
