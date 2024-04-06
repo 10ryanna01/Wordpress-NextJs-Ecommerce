@@ -24,12 +24,12 @@ export default function RootLayout({ children }) {
 
         <Script
           async
+          id="snipcart"
           src="https://cdn.snipcart.com/themes/v3.2.0/default/snipcart.js"
+          data-api-key={secret}
         />
         <div
           hidden
-          id="snipcart"
-          data-api-key={secret}
           // data-config-modal-style="side"
           data-templates-url="/snipcart-templates.html"
         />
