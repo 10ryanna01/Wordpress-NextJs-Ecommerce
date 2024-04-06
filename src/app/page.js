@@ -1,3 +1,4 @@
+import React from "react";
 import Image from "next/image";
 import Header from "./components/Header";
 import gameCard from "../../public/images/World_of_Warcraft_Trading_Card_Game.png";
@@ -7,11 +8,10 @@ import styles from "@styles/page.module.scss";
 import gstyles from "@styles/index.scss";
 
 import products from "@data/products.json";
-
+import Script from "next/script";
 export default function Home() {
   return (
-    <>
-      {" "}
+    <div>
       <Header />
       <main className={styles.main}>
         <div className="FSC__product-grid">
@@ -32,6 +32,17 @@ export default function Home() {
 
                   <p className="FSC__card__desc"> {product.description} </p>
                   <p className="FSC__card__price">${product.price}</p>
+
+                  <button
+                    className="snipcart-add-item"
+                    data-item-id={product.id}
+                    data-item-price={product.price}
+                    data-item-description={product.description}
+                    data-item-image={product.image}
+                    data-item-name={product.title}
+                  >
+                    add to cart{" "}
+                  </button>
                 </div>
               </div>
             );
@@ -123,6 +134,6 @@ export default function Home() {
           </a>
         </div>
       </main>
-    </>
+    </div>
   );
 }
