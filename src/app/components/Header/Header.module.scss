@@ -21,23 +21,23 @@
       transition: color 0.5s ease-in-out;
 
       .FSC__header__brand__title {
-        color: utils.$fsc-neutral;
+        color: var(--color-title-text-hover);
         transition: color 0.5s ease-in-out;
       }
 
       .FSC__header__brand__subtitle {
-        color: utils.$fsc-teal;
+        color: var(--color-title-subtext-hover);
         transition: color 0.5s ease-in-out;
       }
     }
     &__title {
       @extend .FSC__typography__h1;
-      color: utils.$fsc-teal;
+      color: var(--color-title-text);
       text-transform: uppercase;
     }
     &__subtitle {
       @extend .FSC__typography__h4;
-      color: utils.$fsc-neutral;
+      color: var(--color-title-subtext);
       text-transform: uppercase;
       transition: color 0.5s ease-in-out;
       max-width: 35rem;

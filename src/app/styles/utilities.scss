@@ -1,5 +1,5 @@
 // =================
-/// theme
+/// theme vars
 /// ================
 // dark
 
@@ -22,13 +22,23 @@ $fsc-frame-border: #0668af;
     $fsc-frame: #ffffff;
     $fsc-frame-border: #0668af;
 
+    --color-title-text: #{$fsc-frame-border};
+    --color-title-text-hover: #{$fsc-bg};
+
+    --color-title-subtext: #{$fsc-bg};
+    --color-title-subtext-hover: #{$fsc-frame-border};
+
     --color-text: #{$fsc-copy};
     --color-background: #{$fsc-neutral};
+
     --color-card-text: #{$fsc-bg};
-    --colorfilter-bg: #{$fsc-teal};
+    --colorfilter-bg: #{$fsc-neutral};
     --color-card-frame: #{$fsc-neutral};
     --color-card-frame-border: #{$fsc-green};
     --color-card-frame-border-img: #{$fsc-frame-border};
+    --color--filter--border-bg: #{$fsc-neutral};
+    --color--filter--border-color: #{$fsc-frame-border};
+    --color--filter--border-hover-bg: #{$fsc-green};
   }
   [data-theme="dark"] {
     $fsc-bg: #1d1d15;
@@ -40,6 +50,10 @@ $fsc-frame-border: #0668af;
     $fsc-frame: #ffffff;
     $fsc-frame-border: $fsc-bg;
 
+    --color-title-text: #{$fsc-teal};
+    --color-title-text-hover: #{$fsc-neutral};
+    --color-title-subtext: #{$fsc-neutral};
+    --color-title-subtext-hover: #{$fsc-teal};
     --color-hover-neon: #{$fsc-green};
     --color-background: #{$fsc-bg};
     --color-card-text: #{$fsc-copy};
@@ -47,6 +61,9 @@ $fsc-frame-border: #0668af;
     --color-card-frame: #{$fsc-frame};
     --color-card-frame-border: #{$fsc-green};
     --color-card-frame-border-img: #{$fsc-copy};
+    --color--filter--border-bg: #{$fsc-bg};
+    --color--filter--border-color: #{$fsc-teal};
+    --color--filter--border-hover-bg: #{$fsc-green};
   }
 }
 
@@ -266,21 +283,19 @@ $fsc-frame-border: #0668af;
   position: relative;
   height: 50px;
   padding: 0 30px;
-  border: 2px solid $fsc-teal;
-  background: $fsc-bg;
+  border: 2px solid var(--color--filter--border-color);
+  background: var(--color--filter--border-bg);
   user-select: none;
   white-space: nowrap;
-  transition: all 0.05s linear;
-  color: $fsc-teal;
-
-  text-transform: uppercase;
+  transition: all 0.2s ease-in-out;
+  color: var(--color--filter--border-color);
 
   &:before,
   &:after {
     content: "";
     position: absolute;
-    background: var(--colorfilter-bg);
-    transition: all 0.2s linear;
+    background: var(--color--filter--border-bg);
+    transition: all 0.2s ease-in-out;
   }
 
   &:before {
@@ -299,8 +314,8 @@ $fsc-frame-border: #0668af;
 
   &:hover {
     cursor: pointer;
-    color: $fsc-green;
-    border-color: $fsc-green;
+    color: var(--color--filter--border-hover-bg);
+    border-color: var(--color--filter--border-hover-bg);
   }
 
   &:active {
@@ -319,9 +334,11 @@ $fsc-frame-border: #0668af;
 
   & .FSC__buttons__filter__copy {
     @extend .FSC__typography__h4;
+    text-transform: uppercase;
     z-index: 3;
     position: relative;
     font-weight: bold;
+    letter-spacing: 3px;
   }
 }
 
