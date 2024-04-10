@@ -1,4 +1,54 @@
-$dude: #8060f6;
+// =================
+/// theme
+/// ================
+// dark
+
+$fsc-bg: #1d1d15;
+$fsc-green: #33cc00;
+$fsc-copy: #c8c8c8;
+$fsc-neutral: #f0e1c3;
+$fsc-teal: #84a782;
+$fsc-highlight: #c9a100;
+$fsc-frame: #ffffff;
+$fsc-frame-border: #0668af;
+.FSC {
+  [data-theme="light"] {
+    $fsc-bg: #1d1d15;
+    $fsc-green: #33cc00;
+    $fsc-copy: #c8c8c8;
+    $fsc-neutral: #f0e1c3;
+    $fsc-teal: #84a782;
+    $fsc-highlight: #c9a100;
+    $fsc-frame: #ffffff;
+    $fsc-frame-border: #0668af;
+
+    --color-text: #{$fsc-copy};
+    --color-background: #{$fsc-neutral};
+    --color-card-text: #{$fsc-bg};
+    --colorfilter-bg: #{$fsc-teal};
+    --color-card-frame: #{$fsc-neutral};
+    --color-card-frame-border: #{$fsc-green};
+    --color-card-frame-border-img: #{$fsc-frame-border};
+  }
+  [data-theme="dark"] {
+    $fsc-bg: #1d1d15;
+    $fsc-green: #33cc00;
+    $fsc-copy: #c8c8c8;
+    $fsc-neutral: #f0e1c3;
+    $fsc-teal: #84a782;
+    $fsc-highlight: #c9a100;
+    $fsc-frame: #ffffff;
+    $fsc-frame-border: $fsc-bg;
+
+    --color-hover-neon: #{$fsc-green};
+    --color-background: #{$fsc-bg};
+    --color-card-text: #{$fsc-copy};
+    --colorfilter-bg: #{$fsc-bg};
+    --color-card-frame: #{$fsc-frame};
+    --color-card-frame-border: #{$fsc-green};
+    --color-card-frame-border-img: #{$fsc-copy};
+  }
+}
 
 /// mixins
 
@@ -19,10 +69,32 @@ $dude: #8060f6;
   }
 }
 
+@mixin desktop-xl {
+  @media (max-width: 1600px) {
+    @content;
+  }
+}
+
+.FSC__utility__spin {
+  transform-origin: center;
+  line-height: 1;
+  animation: animName 5s linear infinite;
+}
+
+@keyframes animName {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
 .FSC__typography {
   &__h1 {
     font-size: 4rem;
-
+    letter-spacing: 1px;
+    line-height: 1;
     @include phone {
       font-size: 2.5rem;
     }
@@ -30,37 +102,125 @@ $dude: #8060f6;
 
   &__h2 {
     font-size: 3rem;
+    line-height: 1;
+    letter-spacing: 2px;
   }
 
   &__h3 {
-    font-size: 2.5rem;
+    font-size: 2rem;
+    line-height: 1;
+    letter-spacing: 2px;
   }
 
   &__h4 {
-    font-size: 2rem;
+    font-size: 1.4rem;
+    line-height: 1;
+    letter-spacing: 3px;
   }
 }
 
+// links
+.FSC__link {
+  color: $fsc-copy;
+  text-decoration: none;
+  border-bottom: 1px solid #cd3f64;
+}
+
+.FSC__italic {
+  font-style: italic;
+}
 // buttons
 
-@mixin PrimaryButton {
+@mixin primaryButton {
   appearance: none;
-  color: black;
+  color: $fsc-green;
   height: 48px;
-  border: 1px solid black;
-  appearance: none;
-  background-color: #ee82ee;
+  min-width: 130px;
+  border: solid 1px $fsc-highlight-light;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  @extend .FSC__typography__h4;
+  background-color: $fsc-bg;
   letter-spacing: 0.5px;
-  font-size: 16px;
-  font-family: "Archivo", sans-serif;
   font-optical-sizing: auto;
-  font-weight: 500;
-  font-style: normal;
+  padding: 1rem;
+  // border-radius: 4px;
+  cursor: url("https://boostie.com/wp-content/uploads/2024/02/pointer-e1708536933479.png"),
+    pointer;
+  position: relative;
+  transition: all 0.3s ease-in-out;
+  margin-bottom: 1rem;
+
+  &:after {
+    transition: all 0.3s ease-in-out;
+    content: "";
+
+    left: 0;
+    top: 0;
+    transform: translate(2px, 2px);
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    z-index: -1;
+    // border-radius: 4px;
+  }
+
+  &:hover {
+    transform: translate(2px, 2px);
+    transition: all 0.3s ease-in-out;
+
+    &:after {
+      transform: translate(1px, 1px);
+      transition: all 0.3s ease-in-out;
+    }
+  }
+
+  &:active {
+    transform: translate(2px, 4px);
+    border: 2px solid pink;
+    color: $fsc-highlight-light;
+    box-shadow: 0px 0px 139px -15px rgba(51, 204, 0, 0.8);
+    border-image: repeating-linear-gradient(
+        -55deg,
+        #000,
+        #000 20px,
+        $fsc-green 20px,
+        $fsc-green 40px
+      )
+      10;
+    transition: all 0.2s ease-in-out;
+  }
+}
+
+@mixin hazardBorder {
+  border-bottom: 10px solid pink;
+  border-top: 10px solid pink;
+
+  border-image: repeating-linear-gradient(
+      -55deg,
+      #000,
+      #000 20px,
+      #fed141 20px,
+      #fed141 40px
+    )
+    10;
+}
+
+@mixin buyButton {
+  color: $fsc-copy;
+  height: 48px;
+  border-bottom: 2px solid $fsc-highlight;
+  appearance: none;
+  background-color: $fsc-bg;
+  letter-spacing: 0.5px;
+  @extend .FSC__typography__h3;
+  font-optical-sizing: auto;
   display: flex;
   align-items: center;
   padding-left: 24px;
   padding-right: 24px;
-  border-radius: 4px;
+  // border-radius: 4px;
   cursor: url("https://boostie.com/wp-content/uploads/2024/02/pointer-e1708536933479.png"),
     pointer;
   position: relative;
@@ -69,7 +229,7 @@ $dude: #8060f6;
 
   &:after {
     content: "";
-    background-color: black;
+    background-color: $fsc-bg;
     left: 0;
     top: 0;
     transform: translate(2px, 2px);
@@ -77,12 +237,12 @@ $dude: #8060f6;
     height: 100%;
     position: absolute;
     z-index: -1;
-    border-radius: 4px;
-    border: 1px solid black;
+    // border-radius: 4px;
+    border: 1px solid $fsc-bg;
   }
 
   &:hover {
-    background-color: #d675d6;
+    background-color: $fsc-bg;
     left: 1px;
     top: 1px;
 
@@ -92,7 +252,7 @@ $dude: #8060f6;
   }
 
   &:active {
-    background-color: #be68be;
+    background-color: $fsc-copy;
     left: 2px;
     top: 2px;
 
@@ -100,4 +260,172 @@ $dude: #8060f6;
       transform: translate(0px, 0px);
     }
   }
+}
+
+@mixin buttonFilters {
+  position: relative;
+  height: 50px;
+  padding: 0 30px;
+  border: 2px solid $fsc-teal;
+  background: $fsc-bg;
+  user-select: none;
+  white-space: nowrap;
+  transition: all 0.05s linear;
+  color: $fsc-teal;
+
+  text-transform: uppercase;
+
+  &:before,
+  &:after {
+    content: "";
+    position: absolute;
+    background: var(--colorfilter-bg);
+    transition: all 0.2s linear;
+  }
+
+  &:before {
+    width: calc(100% + 6px);
+    height: calc(100% - 16px);
+    top: 8px;
+    left: -3px;
+  }
+
+  &:after {
+    width: calc(100% - 16px);
+    height: calc(100% + 6px);
+    top: -3px;
+    left: 8px;
+  }
+
+  &:hover {
+    cursor: pointer;
+    color: $fsc-green;
+    border-color: $fsc-green;
+  }
+
+  &:active {
+    transform: scale(0.95);
+  }
+
+  &:hover:before {
+    height: calc(100% - 32px);
+    top: 16px;
+  }
+
+  &:hover:after {
+    width: calc(100% - 32px);
+    left: 16px;
+  }
+
+  & .FSC__buttons__filter__copy {
+    @extend .FSC__typography__h4;
+    z-index: 3;
+    position: relative;
+    font-weight: bold;
+  }
+}
+
+//  SCSS Placeholder Extends
+// 3D Tactile Arcade Button sourced from @ https://uiverse.io/njesenberger/thin-owl-11
+.button__arcade {
+  -webkit-appearance: none;
+  appearance: none;
+  position: relative;
+  border-width: 0;
+  padding: 0 0.5rem 1rem;
+  min-width: 150px;
+  box-sizing: border-box;
+  background: transparent;
+  @extend .FSC__typography__h3;
+  cursor: pointer;
+}
+
+.button__arcade__top {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 0;
+  padding: 8px 16px;
+  transform: translateY(0);
+  text-align: center;
+  color: $fsc-copy;
+  text-shadow: 0 -1px rgba(0, 0, 0, 0.25);
+  transition-property: transform;
+  transition-duration: 0.2s;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+.button__arcade:active .button__arcade__top {
+  transform: translateY(6px);
+}
+
+.button__arcade__top::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  border-radius: 4px;
+  width: 100%;
+  height: 100%;
+  box-sizing: content-box;
+  background-image: radial-gradient(#cd3f64, #9d3656);
+  text-align: center;
+  color: $fsc-copy;
+  box-shadow: inset 0 0 0px 1px rgba(255, 255, 255, 0.2),
+    0 1px 2px 1px rgba(255, 255, 255, 0.2);
+  transition-property: border-radius, padding, width, transform;
+  transition-duration: 0.2s;
+}
+
+.button__arcade:active .button__arcade__top::after {
+  border-radius: 6px;
+  padding: 0 2px;
+}
+
+.button__arcade__bottom {
+  position: absolute;
+  z-index: -1;
+  bottom: 4px;
+  left: 4px;
+  border-radius: 8px / 16px 16px 8px 8px;
+  padding-top: 6px;
+  width: calc(100% - 8px);
+  height: calc(100% - 10px);
+  box-sizing: content-box;
+  background-color: #803;
+  background-image: radial-gradient(
+      4px 8px at 4px calc(100% - 8px),
+      rgba(255, 255, 255, 0.25),
+      transparent
+    ),
+    radial-gradient(
+      4px 8px at calc(100% - 4px) calc(100% - 8px),
+      rgba(255, 255, 255, 0.25),
+      transparent
+    ),
+    radial-gradient(16px at -4px 0, $fsc-copy, transparent),
+    radial-gradient(16px at calc(100% + 4px) 0, $fsc-copy, transparent);
+  box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.5),
+    inset 0 -1px 3px 3px rgba(0, 0, 0, 0.4);
+  transition-property: border-radius, padding-top;
+  transition-duration: 0.2s;
+}
+
+.button__arcade:active .button__arcade__bottom {
+  border-radius: 10px 10px 8px 8px / 8px;
+  padding-top: 0;
+}
+
+.button__arcade__base {
+  position: absolute;
+  z-index: -2;
+  top: 4px;
+  left: 0;
+  border-radius: 12px;
+  width: 100%;
+  height: calc(100% - 4px);
+  background-color: rgba(0, 0, 0, 0.15);
+  box-shadow: 0 1px 1px 0 rgba(255, 255, 255, 0.75),
+    inset 0 2px 2px rgba(0, 0, 0, 0.25);
 }

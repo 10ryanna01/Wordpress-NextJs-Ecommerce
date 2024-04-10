@@ -6,9 +6,45 @@
   justify-content: space-between;
   align-items: center;
   padding: 2rem;
-  background: utils.$dude;
+  background: var(--color-background);
+  // border-bottom: 1px solid utils.$fsc-green;
+  position: relative;
+  @include utils.hazardBorder();
+  box-shadow: 0 -70px 200px 1px utils.$fsc-green;
 
-  &__title {
-    @extend .FSC__typography__h1;
+  &__brand {
+    display: flex;
+    flex-flow: column;
+    text-align: left;
+
+    &:hover {
+      transition: color 0.5s ease-in-out;
+
+      .FSC__header__brand__title {
+        color: utils.$fsc-neutral;
+        transition: color 0.5s ease-in-out;
+      }
+
+      .FSC__header__brand__subtitle {
+        color: utils.$fsc-teal;
+        transition: color 0.5s ease-in-out;
+      }
+    }
+    &__title {
+      @extend .FSC__typography__h1;
+      color: utils.$fsc-teal;
+      text-transform: uppercase;
+    }
+    &__subtitle {
+      @extend .FSC__typography__h4;
+      color: utils.$fsc-neutral;
+      text-transform: uppercase;
+      transition: color 0.5s ease-in-out;
+      max-width: 35rem;
+
+      &__link {
+        @extend .FSC__link;
+      }
+    }
   }
 }
