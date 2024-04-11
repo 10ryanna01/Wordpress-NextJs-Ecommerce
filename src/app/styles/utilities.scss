@@ -24,6 +24,7 @@ $fsc-frame-border: #0668af;
     $fsc-frame: #ffffff;
     $fsc-frame-border: #0668af;
 
+    --color-darkmode-text: #{$fsc-bg};
     --color-title-text: #{$fsc-frame-border};
     --color-title-text-hover: #{$fsc-bg};
     --color-box-shadow-glow: #{$fsc-copy-link};
@@ -34,7 +35,7 @@ $fsc-frame-border: #0668af;
     --color-background: #{$fsc-neutral};
 
     --colorfilter-bg: #{$fsc-neutral};
-    --color-card-frame: #{$fsc-neutral};
+    --color-card-frame: #{$fsc-frame-border};
     --color-card-frame-border: #{$fsc-green};
     --color-card-frame-border-img: #{$fsc-frame-border};
     --color--filter--border-bg: #{$fsc-neutral};
@@ -54,10 +55,12 @@ $fsc-frame-border: #0668af;
     $fsc-frame: #ffffff;
     $fsc-frame-border: $fsc-bg;
 
+    --color-darkmode-text: #{$fsc-copy};
+
     --color-box-shadow-glow: #{$fsc-green};
     --color-title-text: #{$fsc-teal};
     --color-title-text-hover: #{$fsc-neutral};
-    --color-title-subtext: #{$fsc-neutral};
+    --color-title-subtext: #{$fsc-copy};
     --color-title-subtext-hover: #{$fsc-teal};
 
     --color-card-bg: #{$fsc-bg};
@@ -66,9 +69,9 @@ $fsc-frame-border: #0668af;
     --color-background: #{$fsc-bg};
     --color-card-text: #{$fsc-copy};
     --colorfilter-bg: #{$fsc-bg};
-    --color-card-frame: #{$fsc-frame};
+    --color-card-frame: #{$fsc-neutral};
     --color-card-frame-border: #{$fsc-green};
-    --color-card-frame-border-img: #{$fsc-copy};
+    --color-card-frame-border-img: #{$fsc-neutral};
     --color--filter--border-bg: #{$fsc-bg};
     --color--filter--border-color: #{$fsc-teal};
     --color--filter--border-hover-bg: #{$fsc-green};
@@ -547,16 +550,21 @@ $fsc-frame-border: #0668af;
 
 .FSC__toggle__switch {
   display: flex;
+  flex-flow: column;
 
-  justify-content: right;
-  background: transparent;
+  background: var(--color-background);
+  padding: 1rem 0;
+  padding-bottom: 0;
+  padding-left: 2rem;
+  justify-content: center;
+  z-index: 3;
   input[type="checkbox"] {
     display: none;
   }
 
   .switch + label {
     align-items: center;
-    color: $fsc-copy;
+    color: var(--color-darkmode-text);
     cursor: pointer;
     display: flex;
     position: relative;
@@ -573,11 +581,12 @@ $fsc-frame-border: #0668af;
   .switch + label::before,
   .switch + label::after {
     content: "";
-    display: block;
+    display: none;
   }
 
   .switch + label::before {
-    background-color: $fsc-copy-link;
+    background: $fsc-copy-link;
+
     border-radius: 500px;
     height: 15px;
     margin-right: 8px;
@@ -587,7 +596,7 @@ $fsc-frame-border: #0668af;
   }
 
   .switch + label::after {
-    background-color: $fsc-copy;
+    background: $fsc-copy;
     border-radius: 13px;
     box-shadow: 0 3px 1px 0 rgba(37, 34, 71, 0.05),
       0 2px 2px 0 rgba(37, 34, 71, 0.1), 0 3px 3px 0 rgba(37, 34, 71, 0.05);
@@ -604,7 +613,6 @@ $fsc-frame-border: #0668af;
 
   .switch + label .switch-x-text {
     display: block;
-    margin-left: 0.5rem;
     margin-right: 1rem;
   }
 
@@ -613,7 +621,10 @@ $fsc-frame-border: #0668af;
     height: 25px;
     overflow: hidden;
     position: relative;
-    width: 200px;
+    min-width: 130px;
+    &:hover,
+    &:active {
+    }
   }
 
   .switch + label .switch-x-unchecked {
@@ -621,6 +632,7 @@ $fsc-frame-border: #0668af;
   }
   .switch + label .switch-x-checked {
     color: $fsc-green;
+    animation: glow 1s ease-in-out infinite alternate;
   }
 
   .switch + label .switch-x-unchecked,
@@ -666,5 +678,17 @@ $fsc-frame-border: #0668af;
     opacity: 1;
     -webkit-transform: none;
     transform: none;
+  }
+}
+
+@-webkit-keyframes glow {
+  from {
+    text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #e60073,
+      0 0 40px #e60073, 0 0 50px #e60073, 0 0 60px #e60073, 0 0 70px #e60073;
+  }
+
+  to {
+    text-shadow: 0 0 20px #fff, 0 0 30px #ff4da6, 0 0 40px #ff4da6,
+      0 0 50px #ff4da6, 0 0 60px #ff4da6, 0 0 70px #ff4da6, 0 0 80px #ff4da6;
   }
 }

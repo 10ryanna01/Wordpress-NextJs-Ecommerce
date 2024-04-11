@@ -1,13 +1,24 @@
 @use "./globals.scss";
 @use "./utilities.scss" as utils;
 
-html,
-body,
-main {
-  // background: utils.$fsc-bg;
-  background: var(--color-background);
+.FSC {
+  position: relative;
+  display: flex;
+  flex-flow: column;
+  &__theme {
+    background: var(--color-background);
+  }
+  &__container {
+    background: var(--color-background);
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+    max-width: 1800px;
+    margin: 0 auto;
+  }
 }
-
 .FSC__product-grid {
   display: grid;
   gap: 1rem;
