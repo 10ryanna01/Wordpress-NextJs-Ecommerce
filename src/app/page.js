@@ -20,18 +20,17 @@ import { GiFalloutShelter } from "react-icons/gi";
 
 import { SiTemporal } from "react-icons/si";
 import ToggleTheme from "./components/ToggleTheme/ToggleTheme";
+import ScreenFilter from "./components/ScreenFilter";
 export default function Home() {
   const [isDark, setIsDark] = useState(true);
   return (
     <div className="FSC">
       <div data-theme={isDark ? "dark" : "light"}>
         <Header />
-
+        <ToggleTheme />
         <main className={styles.main}>
-          <ToggleTheme
-            handleChange={() => setIsDark(!isDark)}
-            isChecked={isDark}
-          />
+          handleChange={() => setIsDark(!isDark)}
+          isChecked={isDark}
           <Results />
           <div className="FSC__product-grid">
             {products.map((product, _idx) => {
@@ -72,19 +71,10 @@ export default function Home() {
               );
             })}
           </div>
-
-          <div className={styles.center}>
-            <Image
-              className={styles.logo}
-              src="/next.svg"
-              alt="Next.js Logo"
-              width={180}
-              height={37}
-              priority
-            />
-          </div>
         </main>
       </div>
+
+      <ScreenFilter />
     </div>
   );
 }

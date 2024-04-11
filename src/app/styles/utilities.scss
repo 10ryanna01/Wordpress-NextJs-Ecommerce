@@ -6,6 +6,7 @@
 $fsc-bg: #1d1d15;
 $fsc-green: #33cc00;
 $fsc-copy: #c8c8c8;
+$fsc-copy-link: #cd3f64;
 $fsc-neutral: #f0e1c3;
 $fsc-teal: #84a782;
 $fsc-highlight: #c9a100;
@@ -16,6 +17,7 @@ $fsc-frame-border: #0668af;
     $fsc-bg: #1d1d15;
     $fsc-green: #33cc00;
     $fsc-copy: #c8c8c8;
+    $fsc-copy-link: #cd3f64;
     $fsc-neutral: #f0e1c3;
     $fsc-teal: #84a782;
     $fsc-highlight: #c9a100;
@@ -24,25 +26,27 @@ $fsc-frame-border: #0668af;
 
     --color-title-text: #{$fsc-frame-border};
     --color-title-text-hover: #{$fsc-bg};
-
+    --color-box-shadow-glow: #{$fsc-copy-link};
     --color-title-subtext: #{$fsc-bg};
     --color-title-subtext-hover: #{$fsc-frame-border};
 
     --color-text: #{$fsc-copy};
     --color-background: #{$fsc-neutral};
 
-    --color-card-text: #{$fsc-bg};
     --colorfilter-bg: #{$fsc-neutral};
     --color-card-frame: #{$fsc-neutral};
     --color-card-frame-border: #{$fsc-green};
     --color-card-frame-border-img: #{$fsc-frame-border};
     --color--filter--border-bg: #{$fsc-neutral};
     --color--filter--border-color: #{$fsc-frame-border};
-    --color--filter--border-hover-bg: #{$fsc-green};
+    --color--filter--border-hover-bg: #{$fsc-copy-link};
+    --color-card-text: #{$fsc-bg};
+    --color-card-bg: #{$fsc-neutral};
   }
   [data-theme="dark"] {
     $fsc-bg: #1d1d15;
     $fsc-green: #33cc00;
+    $fsc-copy-link: #cd3f64;
     $fsc-copy: #c8c8c8;
     $fsc-neutral: #f0e1c3;
     $fsc-teal: #84a782;
@@ -50,10 +54,14 @@ $fsc-frame-border: #0668af;
     $fsc-frame: #ffffff;
     $fsc-frame-border: $fsc-bg;
 
+    --color-box-shadow-glow: #{$fsc-green};
     --color-title-text: #{$fsc-teal};
     --color-title-text-hover: #{$fsc-neutral};
     --color-title-subtext: #{$fsc-neutral};
     --color-title-subtext-hover: #{$fsc-teal};
+
+    --color-card-bg: #{$fsc-bg};
+
     --color-hover-neon: #{$fsc-green};
     --color-background: #{$fsc-bg};
     --color-card-text: #{$fsc-copy};
@@ -70,24 +78,18 @@ $fsc-frame-border: #0668af;
 /// mixins
 
 @mixin phone {
-  @media (max-width: 599px) {
+  @media (max-width: 899px) {
     @content;
   }
 }
 @mixin tablet {
-  @media (min-width: 600px) and (max-width: 980px) {
+  @media (min-width: 900px) and (max-width: 1325px) {
     @content;
   }
 }
 
 @mixin desktop {
-  @media (min-width: 981px) and (max-width: 1500px) {
-    @content;
-  }
-}
-
-@mixin desktop-xl {
-  @media (max-width: 1600px) {
+  @media (max-width: 1800px) {
     @content;
   }
 }
@@ -138,9 +140,8 @@ $fsc-frame-border: #0668af;
 
 // links
 .FSC__link {
-  color: $fsc-copy;
+  color: $fsc-copy-link;
   text-decoration: none;
-  border-bottom: 1px solid #cd3f64;
 }
 
 .FSC__italic {
@@ -316,6 +317,8 @@ $fsc-frame-border: #0668af;
     cursor: pointer;
     color: var(--color--filter--border-hover-bg);
     border-color: var(--color--filter--border-hover-bg);
+    z-index: 3;
+    transition: all 0.3s ease-in-out;
   }
 
   &:active {
@@ -340,6 +343,9 @@ $fsc-frame-border: #0668af;
     font-weight: bold;
     letter-spacing: 3px;
   }
+}
+.FSC__top-layer {
+  z-index: 3;
 }
 
 //  SCSS Placeholder Extends
@@ -445,4 +451,220 @@ $fsc-frame-border: #0668af;
   background-color: rgba(0, 0, 0, 0.15);
   box-shadow: 0 1px 1px 0 rgba(255, 255, 255, 0.75),
     inset 0 2px 2px rgba(0, 0, 0, 0.25);
+}
+
+///////// scan lines
+///
+///
+.scanline {
+  animation: scroll 10s 5s infinite;
+  background: -moz-linear-gradient(
+    top,
+    rgba(0, 221, 0, 0) 0%,
+    rgba(0, 221, 0, 1) 50%,
+    rgba(0, 221, 0, 0) 100%
+  );
+  background: -webkit-linear-gradient(
+    top,
+    rgba(0, 221, 0, 0) 0%,
+    rgba(0, 221, 0, 1) 50%,
+    rgba(0, 221, 0, 0) 100%
+  );
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 221, 0, 0) 0%,
+    rgba(0, 221, 0, 1) 50%,
+    rgba(0, 221, 0, 0) 100%
+  );
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#0000dd00', endColorstr='#0000dd00',GradientType=0 );
+  display: block;
+  height: 20px;
+  opacity: 0.05;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: -5%;
+  z-index: 2;
+}
+
+/* ANIMATE UNIQUE SCANLINE */
+@keyframes scanline {
+  0% {
+    transform: translate3d(0, 200000%, 0);
+  }
+}
+@keyframes scanline {
+  0% {
+    background-position: 0 50%;
+  }
+}
+.overlay {
+  height: 1px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 1px;
+  pointer-events: none;
+
+  &:before {
+    width: 100%;
+    height: 100%;
+    background-image: linear-gradient(
+      rgba(39, 43, 46, 0.3) 1px,
+      transparent 1px
+    );
+    background-size: 2px 2px;
+    background-attachment: fixed;
+
+    background-size: 100% 3px, 6px 100%;
+    content: "";
+    display: block;
+    pointer-events: none;
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 2;
+  }
+
+  &:after {
+    animation: flicker 2s infinite;
+    background: rgba(16, 16, 16, 0.1);
+    content: "";
+    display: block;
+    pointer-events: none;
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 2;
+  }
+}
+
+///////////  toggle switch
+
+.FSC__toggle__switch {
+  display: flex;
+
+  justify-content: right;
+  background: transparent;
+  input[type="checkbox"] {
+    display: none;
+  }
+
+  .switch + label {
+    align-items: center;
+    color: $fsc-copy;
+    cursor: pointer;
+    display: flex;
+    position: relative;
+    user-select: none;
+    height: 15px;
+  }
+
+  label {
+    @extend .FSC__typography__h4;
+    font-weight: bold;
+    text-transform: capitalize;
+  }
+
+  .switch + label::before,
+  .switch + label::after {
+    content: "";
+    display: block;
+  }
+
+  .switch + label::before {
+    background-color: $fsc-copy-link;
+    border-radius: 500px;
+    height: 15px;
+    margin-right: 8px;
+    -webkit-transition: background-color 0.125s ease-out;
+    transition: background-color 0.125s ease-out;
+    width: 25px;
+  }
+
+  .switch + label::after {
+    background-color: $fsc-copy;
+    border-radius: 13px;
+    box-shadow: 0 3px 1px 0 rgba(37, 34, 71, 0.05),
+      0 2px 2px 0 rgba(37, 34, 71, 0.1), 0 3px 3px 0 rgba(37, 34, 71, 0.05);
+    height: 13px;
+    left: 1px;
+    position: absolute;
+    top: 1px;
+    -webkit-transition: -webkit-transform 0.125s ease-out;
+    transition: -webkit-transform 0.125s ease-out;
+    transition: transform 0.125s ease-out;
+    transition: transform 0.125s ease-out, -webkit-transform 0.125s ease-out;
+    width: 13px;
+  }
+
+  .switch + label .switch-x-text {
+    display: block;
+    margin-left: 0.5rem;
+    margin-right: 1rem;
+  }
+
+  .switch + label .switch-x-toggletext {
+    display: block;
+    height: 25px;
+    overflow: hidden;
+    position: relative;
+    width: 200px;
+  }
+
+  .switch + label .switch-x-unchecked {
+    color: $fsc-copy-link;
+  }
+  .switch + label .switch-x-checked {
+    color: $fsc-green;
+  }
+
+  .switch + label .switch-x-unchecked,
+  .switch + label .switch-x-checked {
+    left: 0;
+    position: absolute;
+    top: 0;
+    transition: transform 0.125s ease-out, opacity 0.125s ease-out;
+  }
+
+  .switch + label .switch-x-unchecked {
+    opacity: 1;
+    -webkit-transform: none;
+    transform: none;
+  }
+
+  .switch + label .switch-x-checked {
+    opacity: 0;
+    -webkit-transform: translate3d(0, 100%, 0);
+    transform: translate3d(0, 100%, 0);
+  }
+
+  .switch + label .switch-x-hiddenlabel {
+    position: absolute;
+    visibility: hidden;
+  }
+  .switch:checked + label::before {
+    background: $fsc-green;
+  }
+
+  .switch:checked + label::after {
+    -webkit-transform: translate3d(10px, 0, 0);
+    transform: translate3d(10px, 0, 0);
+  }
+
+  .switch:checked + label .switch-x-unchecked {
+    opacity: 0;
+    -webkit-transform: translate3d(0, -100%, 0);
+    transform: translate3d(0, -100%, 0);
+  }
+
+  .switch:checked + label .switch-x-checked {
+    opacity: 1;
+    -webkit-transform: none;
+    transform: none;
+  }
 }

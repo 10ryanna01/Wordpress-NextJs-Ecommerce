@@ -11,6 +11,7 @@ main {
 .FSC__product-grid {
   display: grid;
   gap: 1rem;
+  padding-bottom: 4rem;
   grid-template-columns: 1fr 1fr 1fr 1fr;
 
   @include utils.desktop {
@@ -48,6 +49,14 @@ main {
     transition: all 0.2s ease-in-out;
     outline-offset: calc(var(--g) / -2);
     border: 1px solid transparent;
+    @extend .FSC__top-layer;
+  }
+
+  &:hover {
+    .FSC__card__img {
+      border-color: var(--color-card-frame-border);
+      transition: border-color 0.2s ease-in-out;
+    }
   }
 }
 
@@ -68,7 +77,13 @@ main {
   transition: color 0.5s ease-in-out;
   border-radius: 0;
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.6);
+
+  background: var(--color-card-bg);
+
   &:hover {
+    transition-duration: 0.3s;
+
+    @extend .FSC__top-layer;
     .FSC__utility__spin {
       animation-play-state: paused;
     }
@@ -76,6 +91,7 @@ main {
   &__title {
     @extend .FSC__typography__h3;
     margin-bottom: 1rem;
+    z-index: inherit;
   }
   &__img {
     max-width: 300px;
@@ -85,33 +101,27 @@ main {
     outline-style: solid;
     padding: 1rem;
     transition: border-color 0.5s ease-in-out;
-    &:hover {
-      border-color: utils.$fsc-green;
-      transition: border-color 0.5s ease-in-out;
-    }
+    z-index: inherit;
   }
   &__price {
     margin-bottom: 1rem;
+    z-index: inherit;
   }
   &__desc {
     margin-bottom: 1rem;
+    @extend .FSC__typography__h4;
+    z-index: inherit;
   }
   &__addtocart {
     @extend .FSC__buttons__buy;
-  }
-
-  &:hover {
-    background-position: 0 0, 0 0;
-    -webkit-transition-duration: 0.5s;
-    -moz-transition-duration: 0.5s;
-    transition-duration: 0.5s;
+    z-index: inherit;
   }
 }
 
 .FSC__buttons {
   &__primary {
     @extend .button__arcade;
-    z-index: 2;
+    z-index: 3;
     &__top {
       @extend .button__arcade__top;
       gap: 1rem;
