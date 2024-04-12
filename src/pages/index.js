@@ -63,7 +63,7 @@ export default function HomePage({ products }) {
                     <div className="cb">
                       <h3 className="FSC__card__title">{product.title}</h3>
                       <Image
-                        src={featuredImage.sourceUrl}
+                        src={product.featuredImage.sourceUrl}
                         alt={featuredImage.altText}
                         className="FSC__card__img"
                         // height width set to intrinsic image values
@@ -114,7 +114,7 @@ export async function getStaticProps() {
   const response = await client.query({
     query: gql`
       query AllProducts {
-        products {
+        products(first: 30) {
           edges {
             node {
               id
@@ -129,11 +129,11 @@ export async function getStaticProps() {
               featuredImage {
                 node {
                   altText
+                  sourceUrl
                   mediaDetails {
                     height
                     width
                   }
-                  sourceUrl
                 }
               }
             }
