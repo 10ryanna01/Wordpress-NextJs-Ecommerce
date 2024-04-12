@@ -145,6 +145,14 @@ $fsc-frame-border: #0668af;
 .FSC__link {
   color: $fsc-copy-link;
   text-decoration: none;
+  &__wrapper {
+    color: inherit;
+    text-decoration: none;
+    &:hover {
+      color: inherit;
+      cursor: inherit;
+    }
+  }
 }
 
 .FSC__italic {

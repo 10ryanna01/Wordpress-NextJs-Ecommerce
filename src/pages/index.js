@@ -53,7 +53,10 @@ export default function HomePage({ products, props }) {
                 return (
                   <div key={product.id} className="FSC__card">
                     <div className="cb">
-                      <Link href={`products/${product.slug}`}>
+                      <Link
+                        className="FSC__link__wrapper"
+                        href={`products/${product.slug}`}
+                      >
                         <h3 className="FSC__card__title">{product.title}</h3>
                         <Image
                           src={product.featuredImage.sourceUrl}
