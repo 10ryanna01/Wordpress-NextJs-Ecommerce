@@ -2,9 +2,15 @@
 import React from "react";
 import { FaShoppingCart } from "react-icons/fa";
 import Link from "next/link";
+
+import { useSnipcart } from "@hooks/use-snipcart";
 import styles from "./Header.module.scss";
 
 export default function Header() {
+  const { cart = {} } = useSnipcart();
+
+  const { subtotal = "0.00" } = cart;
+  console.log(cart, "is the set price in the cart");
   return (
     <>
       <div className={styles["FSC__header"]}>
@@ -29,7 +35,7 @@ export default function Header() {
         <button type="button" className="FSC__buttons__primary">
           <div className="FSC__buttons__primary__top snipcart-checkout">
             <FaShoppingCart />
-            <span className="snipcart-total-price"></span>
+            <span> $ {subtotal}</span>
           </div>
           <div className="FSC__buttons__primary__bottom"></div>
           <div className="FSC__buttons__primary__base"></div>

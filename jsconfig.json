@@ -4,6 +4,7 @@
     "paths": {
       "@styles/*": ["src/app/styles/*"],
       "@data/*": ["src/app/data/*"],
+      "@hooks/*": ["src/app/hooks/*"],
       "@/*": ["./src/*"]
     }
   }
