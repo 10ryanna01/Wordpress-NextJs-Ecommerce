@@ -10,6 +10,7 @@ import { SiTemporal } from "react-icons/si";
 import ScreenFilter from "@/app/components/ScreenFilter";
 import Header from "@/app/components/Header";
 import ToggleTheme from "@/app/components/ToggleTheme";
+import Link from "next/link";
 
 export const metadata = {
   title: "SKILL TREE COLLECTABLES",
@@ -52,18 +53,25 @@ export default function HomePage({ products, props }) {
                 return (
                   <div key={product.id} className="FSC__card">
                     <div className="cb">
-                      <h3 className="FSC__card__title">{product.title}</h3>
-                      <Image
-                        src={product.featuredImage.sourceUrl}
-                        alt={featuredImage.altText}
-                        className="FSC__card__img"
-                        // height width set to intrinsic image values
-                        width={featuredImage.mediaDetails.width}
-                        height={featuredImage.mediaDetails.height}
-                        sizes="360px"
-                        priority
-                      />
-                      <p className="FSC__card__desc"> {product.description}</p>
+                      <Link href={`products/${product.slug}`}>
+                        <h3 className="FSC__card__title">{product.title}</h3>
+                        <Image
+                          src={product.featuredImage.sourceUrl}
+                          alt={featuredImage.altText}
+                          className="FSC__card__img"
+                          // height width set to intrinsic image values
+                          width={featuredImage.mediaDetails.width}
+                          height={featuredImage.mediaDetails.height}
+                          sizes="360px"
+                          priority
+                        />
+                      </Link>
+                      <div className="FSC__card__desc">
+                        <div
+                          dangerouslySetInnerHTML={{ __html: product.content }}
+                        ></div>
+                      </div>
+
                       <p className="FSC__card__price">
                         ${product.productPrice}
                       </p>
@@ -110,6 +118,7 @@ export async function getStaticProps() {
             node {
               id
               content
+
               product {
                 productId
                 productPrice
