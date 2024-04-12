@@ -6,19 +6,10 @@ import styles from "@styles/page.module.scss";
 
 import gstyles from "@styles/index.scss";
 
-import { FaChevronRight } from "react-icons/fa6";
-import { FaShoppingCart } from "react-icons/fa";
-import { SiAtom } from "react-icons/si";
-import { GiReactor } from "react-icons/gi";
-import { FaReact } from "react-icons/fa";
-
-import { GiFalloutShelter } from "react-icons/gi";
-
 import { SiTemporal } from "react-icons/si";
 import ScreenFilter from "@/app/components/ScreenFilter";
 import Header from "@/app/components/Header";
 import ToggleTheme from "@/app/components/ToggleTheme";
-import RootLayout from "./layout";
 
 export const metadata = {
   title: "SKILL TREE COLLECTABLES",
@@ -26,7 +17,7 @@ export const metadata = {
     "A COLLECTION OF STATS CARDS FROM THE FALLOUT SERIES ADAPTED FROM THE FALLOUT WIKI",
 };
 
-export default function HomePage({ products }) {
+export default function HomePage({ products, props }) {
   const [isDark, setIsDark] = useState(true);
   console.log();
 

@@ -1,9 +1,10 @@
 import Script from "next/script";
 
-export default function MyApp({}) {
+export default function MyApp({ Component, pageProps }) {
   const secret = process.env.NEXT_PUBLIC_SNIPCART;
   return (
     <>
+      <Component {...pageProps} />
       <link
         rel="stylesheet"
         href="https://cdn.snipcart.com/themes/3.7.0/default/snipcart.css"
