@@ -1,3 +1,9 @@
+work in progress so far // [WIP Live Link](https://wordpress-next-js-ecommerce.vercel.app/)
+
+Nice to haves:
+sound: for immersion / game HUD immersion
+Search: search for Perks/Skills
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
