@@ -15,9 +15,11 @@ export default function Header() {
     <>
       <div className={styles["FSC__header"]}>
         <div className={styles["FSC__header__brand"]}>
-          <h1 className={styles["FSC__header__brand__title"]}>
-            Skill Tree Collectables
-          </h1>
+          <Link href="/" className={styles["FSC__header__brand"]}>
+            <h1 className={styles["FSC__header__brand__title"]}>
+              Skill Tree Collectables
+            </h1>
+          </Link>
           <h2 className={styles["FSC__header__brand__subtitle"]}>
             a collection of stats cards from the Fallout series adapted from
             the&nbsp;
