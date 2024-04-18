@@ -554,7 +554,7 @@ $fsc-frame-border: #0668af;
   }
 }
 
-///////////  toggle switch
+///////////  toggle switch /////////
 
 .FSC__toggle__switch {
   display: flex;
@@ -564,6 +564,9 @@ $fsc-frame-border: #0668af;
   padding: 1rem 0;
   padding-bottom: 0;
   padding-left: 2rem;
+  @include phone() {
+    padding-left: 1rem;
+  }
   justify-content: center;
   z-index: 3;
   input[type="checkbox"] {

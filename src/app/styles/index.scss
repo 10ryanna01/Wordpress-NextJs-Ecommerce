@@ -22,6 +22,7 @@
 .FSC__product-grid {
   display: grid;
   gap: 1rem;
+  align-self: center;
   padding-bottom: 4rem;
   grid-template-columns: 1fr 1fr 1fr 1fr;
 
@@ -34,6 +35,8 @@
 
   @include utils.phone {
     grid-template-columns: 1fr;
+    transform: scale(0.8);
+    transform-origin: top;
   }
 }
 
@@ -78,12 +81,30 @@
   align-content: center;
   justify-content: center;
   padding: 2rem 0;
+
+  @include utils.tablet {
+    width: 100%;
+    display: grid;
+    padding: 1rem 0;
+    grid-template-columns: 1fr 1fr 1fr;
+
+    transform: (scale(0.8));
+  }
+  @include utils.phone {
+    width: 100%;
+    display: grid;
+    padding: 0;
+    grid-template-columns: 1fr 1fr;
+
+    transform: (scale(0.8));
+  }
 }
 
 .FSC__card {
   display: flex;
+  max-width: 440px;
   color: var(--color-card-text);
-  flex-flow: column;
+  // flex-flow: column;
   border: solid 2px transparent;
   transition: color 0.5s ease-in-out;
   border-radius: 0;
@@ -128,11 +149,25 @@
     z-index: inherit;
   }
 }
-
+[aria-current] {
+  &:focus,
+  &:active {
+    color: red !important;
+    border: solid 6px red !important;
+  }
+}
+// [aria-pressed="true"] {
+//   color: red !important;
+//   border: solid 6px red !important;
+// }
 .FSC__buttons {
   &__primary {
     @extend .button__arcade;
     z-index: 3;
+
+    // @include utils.phone {
+    //   transform: scale(0.8);
+    // }
     &__top {
       @extend .button__arcade__top;
       gap: 1rem;
@@ -173,6 +208,13 @@
 
   &__filter {
     @include utils.buttonFilters();
+
+    @include utils.tablet {
+      width: 100%;
+    }
+    @include utils.phone {
+      width: 100%;
+    }
   }
 
   &__buy {

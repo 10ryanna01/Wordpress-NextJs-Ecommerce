@@ -1,5 +1,7 @@
 "use client";
 import React, { useState } from "react";
+import Link from "next/link";
+import Layout from "@/app/components/Layout";
 import { ApolloClient, InMemoryCache, gql } from "@apollo/client";
 import Image from "next/image";
 import styles from "@styles/page.module.scss";
@@ -7,11 +9,6 @@ import styles from "@styles/page.module.scss";
 import gstyles from "@styles/index.scss";
 
 import { SiTemporal } from "react-icons/si";
-import ScreenFilter from "@/app/components/ScreenFilter";
-import Header from "@/app/components/Header";
-import ToggleTheme from "@/app/components/ToggleTheme";
-import Link from "next/link";
-import Layout from "@/app/components/Layout";
 
 export const metadata = {
   title: "SKILL TREE COLLECTABLES",
@@ -19,12 +16,61 @@ export const metadata = {
     "A COLLECTION OF STATS CARDS FROM THE FALLOUT SERIES ADAPTED FROM THE FALLOUT WIKI",
 };
 
-export default function HomePage({ products, props }) {
+export default function HomePage({ products, skillspeciality }) {
+  console.log(products);
+  console.log(skillspeciality);
+
+  const [isPressed, setisPressed] = useState("");
+  const [activeSkillSpeciality, setActiveSkillSpeciality] = useState();
+  let activeProducts = products;
+  console.log(activeSkillSpeciality);
+
+  if (activeSkillSpeciality) {
+    activeProducts = activeProducts.filter(({ skillspeciality }) => {
+      const skillspecialityIds = skillspeciality.map(({ slug }) => slug);
+      return skillspecialityIds.includes(activeSkillSpeciality);
+    });
+  }
+
   return (
     <>
       <Layout>
         <main className="FSC__container">
-          <div className="FSC__filters">
+          <ul className="FSC__filters">
+            <li>
+              <button
+                aria-current="view all"
+                aria-pressed={!isPressed}
+                type="button"
+                className={`FSC__buttons__filter`}
+                onClick={() => {
+                  setActiveSkillSpeciality(undefined),
+                    setisPressed((isPressed) => !isPressed);
+                }}
+              >
+                <span className="FSC__buttons__filter__copy">view all</span>
+              </button>
+            </li>
+            {skillspeciality.map((skillspeciality) => {
+              return (
+                <li key={skillspeciality.id}>
+                  <button
+                    aria-pressed={isPressed}
+                    aria-current={skillspeciality.slug}
+                    className={`FSC__buttons__filter`}
+                    onClick={() => {
+                      setActiveSkillSpeciality(skillspeciality.slug);
+                    }}
+                  >
+                    <span className="FSC__buttons__filter__copy">
+                      {skillspeciality.name}
+                    </span>
+                  </button>
+                </li>
+              );
+            })}
+          </ul>
+          {/* <div className="FSC__filters">
             <button className="FSC__buttons__filter">
               <span className="FSC__buttons__filter__copy">intelegence</span>
             </button>
@@ -37,9 +83,9 @@ export default function HomePage({ products, props }) {
             <button className="FSC__buttons__filter">
               <span className="FSC__buttons__filter__copy">all</span>
             </button>
-          </div>
+          </div> */}
           <div className="FSC__product-grid">
-            {products.map((product) => {
+            {activeProducts.map((product) => {
               const { featuredImage } = product;
               return (
                 <div key={product.id} className="FSC__card">
@@ -47,6 +93,7 @@ export default function HomePage({ products, props }) {
                     <Link
                       className="FSC__link__wrapper"
                       href={`products/${product.slug}`}
+                      aria-current={`${product.slug}`}
                     >
                       <h3 className="FSC__card__title">{product.title}</h3>
                       <Image
@@ -103,13 +150,12 @@ export async function getStaticProps() {
 
   const response = await client.query({
     query: gql`
-      query AllProducts {
+      query AllProductsAndSkillSpecialities {
         products(first: 30) {
           edges {
             node {
               id
               content
-
               product {
                 productId
                 productPrice
@@ -127,6 +173,24 @@ export async function getStaticProps() {
                   }
                 }
               }
+              skillspeciality {
+                edges {
+                  node {
+                    id
+                    name
+                    slug
+                  }
+                }
+              }
+            }
+          }
+        }
+        allSkillspeciality {
+          edges {
+            node {
+              id
+              name
+              slug
             }
           }
         }
@@ -142,13 +206,19 @@ export async function getStaticProps() {
       featuredImage: {
         ...node.featuredImage.node,
       },
+      skillspeciality: node.skillspeciality.edges.map(({ node }) => node),
     };
     return data;
   });
 
+  const skillspeciality = response.data.allSkillspeciality.edges.map(
+    ({ node }) => node
+  );
+
   return {
     props: {
       products,
+      skillspeciality,
     },
   };
 }
