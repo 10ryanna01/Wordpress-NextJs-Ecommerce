@@ -1,4 +1,3 @@
-"use client";
 import React, { useState } from "react";
 import Head from "next/head";
 import { ApolloClient, InMemoryCache, gql } from "@apollo/client";
@@ -8,9 +7,6 @@ import styles from "@styles/page.module.scss";
 import gstyles from "@styles/index.scss";
 
 import { SiTemporal } from "react-icons/si";
-import ScreenFilter from "@/app/components/ScreenFilter";
-import Header from "@/app/components/Header";
-import ToggleTheme from "@/app/components/ToggleTheme";
 import Layout from "@/app/components/Layout";
 
 export default function Product({ product }) {
@@ -38,7 +34,6 @@ export default function Product({ product }) {
                   width={featuredImage.mediaDetails.width}
                   height={featuredImage.mediaDetails.height}
                   sizes="360px"
-                  priority
                 />
                 <div className="FSC__card__desc">
                   <div
@@ -57,7 +52,7 @@ export default function Product({ product }) {
                   data-item-name={product.title}
                 >
                   <div className="FSC__buttons__secondary__top">
-                    <SiTemporal className="FSC__utility__spin" /> add to cart{" "}
+                    <SiTemporal className="FSC__utility__spin" /> add to cart
                   </div>
                   <div className="FSC__buttons__secondary__bottom"></div>
                   <div className="FSC__buttons__secondary__base"></div>
@@ -159,6 +154,6 @@ export async function getStaticPaths() {
 
   return {
     paths,
-    fallback: false,
+    fallback: true,
   };
 }

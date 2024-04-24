@@ -39,7 +39,6 @@ export default function HomePage({ products, skillspeciality }) {
           <ul className="FSC__filters">
             <li>
               <button
-                aria-current="view all"
                 aria-pressed={!isPressed}
                 type="button"
                 className={`FSC__buttons__filter`}
@@ -56,7 +55,6 @@ export default function HomePage({ products, skillspeciality }) {
                 <li key={skillspeciality.id}>
                   <button
                     aria-pressed={isPressed}
-                    aria-current={skillspeciality.slug}
                     className={`FSC__buttons__filter`}
                     onClick={() => {
                       setActiveSkillSpeciality(skillspeciality.slug);
@@ -70,20 +68,7 @@ export default function HomePage({ products, skillspeciality }) {
               );
             })}
           </ul>
-          {/* <div className="FSC__filters">
-            <button className="FSC__buttons__filter">
-              <span className="FSC__buttons__filter__copy">intelegence</span>
-            </button>
-            <button className="FSC__buttons__filter">
-              <span className="FSC__buttons__filter__copy">strength</span>
-            </button>
-            <button className="FSC__buttons__filter">
-              <span className="FSC__buttons__filter__copy">charisma</span>
-            </button>
-            <button className="FSC__buttons__filter">
-              <span className="FSC__buttons__filter__copy">all</span>
-            </button>
-          </div> */}
+
           <div className="FSC__product-grid">
             {activeProducts.map((product) => {
               const { featuredImage } = product;
@@ -93,7 +78,6 @@ export default function HomePage({ products, skillspeciality }) {
                     <Link
                       className="FSC__link__wrapper"
                       href={`products/${product.slug}`}
-                      aria-current={`${product.slug}`}
                     >
                       <h3 className="FSC__card__title">{product.title}</h3>
                       <Image
@@ -125,7 +109,7 @@ export default function HomePage({ products, skillspeciality }) {
                     >
                       <div className="FSC__buttons__secondary__top">
                         <SiTemporal className="FSC__utility__spin" /> add to
-                        cart{" "}
+                        cart
                       </div>
                       <div className="FSC__buttons__secondary__bottom"></div>
                       <div className="FSC__buttons__secondary__base"></div>
@@ -151,7 +135,7 @@ export async function getStaticProps() {
   const response = await client.query({
     query: gql`
       query AllProductsAndSkillSpecialities {
-        products(first: 30) {
+        products(first: 33) {
           edges {
             node {
               id
