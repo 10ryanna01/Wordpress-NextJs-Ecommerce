@@ -31,6 +31,20 @@ export default function Home({ products, skillspeciality }) {
     });
   }
 
+  const keyStr =
+    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=";
+
+  const triplet = (e1, e2, e3) =>
+    keyStr.charAt(e1 >> 2) +
+    keyStr.charAt(((e1 & 3) << 4) | (e2 >> 4)) +
+    keyStr.charAt(((e2 & 15) << 2) | (e3 >> 6)) +
+    keyStr.charAt(e3 & 63);
+
+  const rgbDataURL = (r, g, b) =>
+    `data:image/gif;base64,R0lGODlhAQABAPAA${
+      triplet(0, r, g) + triplet(b, 255, 255)
+    }/yH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==`;
+
   return (
     <>
       <Layout>
@@ -79,15 +93,15 @@ export default function Home({ products, skillspeciality }) {
                       <h3 className="FSC__card__title">{product.title}</h3>
                       <Image
                         src={product.featuredImage.sourceUrl}
-                        blurDataURL={product.featuredImage.sourceUrl}
                         placeholder="blur"
-                        loading="lazy"
+                        blurDataURL={rgbDataURL(237, 181, 6)}
                         alt={featuredImage.altText}
                         className="FSC__card__img"
                         // height width set to intrinsic image values
                         width={featuredImage.mediaDetails.width}
                         height={featuredImage.mediaDetails.height}
                         sizes="360px"
+                        priority
                       />
                     </Link>
                     <div className="FSC__card__desc">
