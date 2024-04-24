@@ -16,7 +16,7 @@ export const metadata = {
     "A COLLECTION OF STATS CARDS FROM THE FALLOUT SERIES ADAPTED FROM THE FALLOUT WIKI",
 };
 
-export default function HomePage({ products, skillspeciality }) {
+export default function Home({ products, skillspeciality }) {
   console.log(products);
   console.log(skillspeciality);
 

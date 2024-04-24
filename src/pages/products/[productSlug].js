@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import Head from "next/head";
 import { ApolloClient, InMemoryCache, gql } from "@apollo/client";
 import Image from "next/image";
@@ -27,13 +27,13 @@ export default function Product({ product }) {
               <div className="cb">
                 <h3 className="FSC__card__title">{product.title}</h3>
                 <Image
+                  width={featuredImage.mediaDetails.width}
+                  height={featuredImage.mediaDetails.height}
+                  sizes="360px"
                   src={featuredImage.sourceUrl}
                   alt={featuredImage.altText}
                   className="FSC__card__img"
                   // height width set to intrinsic image values
-                  width={featuredImage.mediaDetails.width}
-                  height={featuredImage.mediaDetails.height}
-                  sizes="360px"
                 />
                 <div className="FSC__card__desc">
                   <div
