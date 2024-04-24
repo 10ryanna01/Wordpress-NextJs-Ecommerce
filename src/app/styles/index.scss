@@ -204,12 +204,9 @@
     @include utils.buttonFilters();
 
     &:active,
-    &:focus,
-    &:focus *,
-    &:active * {
+    &:focus {
       color: utils.$fsc-copy-link;
       border-color: utils.$fsc-copy-link;
-      outline-color: utils.$fsc-copy-link;
     }
     @include utils.tablet {
       width: 100%;
