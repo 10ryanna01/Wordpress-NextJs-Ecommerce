@@ -81,13 +81,13 @@ export default function Home({ products, skillspeciality }) {
                         src={product.featuredImage.sourceUrl}
                         blurDataURL={product.featuredImage.sourceUrl}
                         placeholder="blur"
+                        loading="lazy"
                         alt={featuredImage.altText}
                         className="FSC__card__img"
                         // height width set to intrinsic image values
                         width={featuredImage.mediaDetails.width}
                         height={featuredImage.mediaDetails.height}
                         sizes="360px"
-                        priority
                       />
                     </Link>
                     <div className="FSC__card__desc">
