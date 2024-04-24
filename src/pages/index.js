@@ -20,7 +20,6 @@ export default function Home({ products, skillspeciality }) {
   console.log(products);
   console.log(skillspeciality);
 
-  const [isPressed, setisPressed] = useState("");
   const [activeSkillSpeciality, setActiveSkillSpeciality] = useState();
   let activeProducts = products;
   console.log(activeSkillSpeciality);
@@ -37,25 +36,11 @@ export default function Home({ products, skillspeciality }) {
       <Layout>
         <main className="FSC__container">
           <ul className="FSC__filters">
-            <li>
-              <button
-                aria-pressed={!isPressed}
-                type="button"
-                className={`FSC__buttons__filter`}
-                onClick={() => {
-                  setActiveSkillSpeciality(undefined),
-                    setisPressed((isPressed) => !isPressed);
-                }}
-              >
-                <span className="FSC__buttons__filter__copy">view all</span>
-              </button>
-            </li>
             {skillspeciality.map((skillspeciality) => {
               return (
                 <li key={skillspeciality.id}>
                   <button
-                    aria-pressed={isPressed}
-                    className={`FSC__buttons__filter`}
+                    className={`FSC__buttons__filter  `}
                     onClick={() => {
                       setActiveSkillSpeciality(skillspeciality.slug);
                     }}
@@ -67,6 +52,18 @@ export default function Home({ products, skillspeciality }) {
                 </li>
               );
             })}
+            <li>
+              <button
+                type="button"
+                className={`FSC__buttons__filter  `}
+                autoFocus
+                onClick={() => {
+                  setActiveSkillSpeciality(undefined);
+                }}
+              >
+                <span className="FSC__buttons__filter__copy">view all</span>
+              </button>
+            </li>
           </ul>
 
           <div className="FSC__product-grid">
@@ -82,6 +79,8 @@ export default function Home({ products, skillspeciality }) {
                       <h3 className="FSC__card__title">{product.title}</h3>
                       <Image
                         src={product.featuredImage.sourceUrl}
+                        blurDataURL={product.featuredImage.sourceUrl}
+                        placeholder="blur"
                         alt={featuredImage.altText}
                         className="FSC__card__img"
                         // height width set to intrinsic image values

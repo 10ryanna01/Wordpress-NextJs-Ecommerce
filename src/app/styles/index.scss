@@ -143,23 +143,17 @@
     margin-bottom: 1rem;
     @extend .FSC__typography__h4;
     z-index: inherit;
+    * {
+      color: var(--color-card-text);
+      text-decoration: none;
+    }
   }
   &__addtocart {
     @extend .FSC__buttons__buy;
     z-index: inherit;
   }
 }
-[aria-current] {
-  &:focus,
-  &:active {
-    color: red !important;
-    border: solid 6px red !important;
-  }
-}
-// [aria-pressed="true"] {
-//   color: red !important;
-//   border: solid 6px red !important;
-// }
+
 .FSC__buttons {
   &__primary {
     @extend .button__arcade;
@@ -209,6 +203,14 @@
   &__filter {
     @include utils.buttonFilters();
 
+    &:active,
+    &:focus,
+    &:focus *,
+    &:active * {
+      color: utils.$fsc-copy-link;
+      border-color: utils.$fsc-copy-link;
+      outline-color: utils.$fsc-copy-link;
+    }
     @include utils.tablet {
       width: 100%;
     }
