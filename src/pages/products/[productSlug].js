@@ -2,6 +2,7 @@ import React from "react";
 import Head from "next/head";
 import { ApolloClient, InMemoryCache, gql } from "@apollo/client";
 import Image from "next/image";
+import { useRouter } from "next/router";
 import styles from "@styles/page.module.scss";
 
 import gstyles from "@styles/index.scss";
@@ -10,15 +11,20 @@ import { SiTemporal } from "react-icons/si";
 import Layout from "@/app/components/Layout";
 
 export default function Product({ product }) {
+  const router = useRouter();
+  console.log(`Building slug:  `);
+  if (router.isFallback) {
+    return <div>Loading...</div>;
+  }
   const { featuredImage } = product;
 
   return (
     <>
-      <Head>
-        <title>{product.title}</title>
-        <meta name="description" content={product.title} key="desc" />
-      </Head>
       <Layout>
+        <Head>
+          <title>{product.title}</title>
+          <meta name="description" content={product.title} key="desc" />
+        </Head>
         <main className="FSC__container">
           <div className="FSC__filters">Product</div>
           <div className="FSC__filters">{product.title}</div>
